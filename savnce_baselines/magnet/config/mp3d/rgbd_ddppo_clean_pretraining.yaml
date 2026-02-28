@@ -1,0 +1,76 @@
+BASE_TASK_CONFIG_PATH: "configs/savnce/magnet/mp3d/savnce_clean.yaml"
+TRAINER_NAME: "magnet_ddppo"
+NUM_PROCESSES: 10
+SENSORS: ["DEPTH_SENSOR", "RGB_SENSOR"]
+NUM_UPDATES: 40000
+LOG_INTERVAL: 10
+CHECKPOINT_INTERVAL: 100
+VIDEO_OPTION: []
+VISUALIZATION_OPTION: []
+
+EVAL:
+  SPLIT: "val"
+  USE_CKPT_CONFIG: True
+
+RL:
+  PPO:
+    clip_param: 0.2
+    ppo_epoch: 2
+    num_mini_batch: 5
+    value_loss_coef: 0.5
+    entropy_coef: 0.05
+    lr: 2.5e-4
+    eps: 1e-5
+    max_grad_norm: 0.2
+    # decide the length of history that ppo encodes
+    num_steps: 150
+    hidden_size: 512
+    use_gae: True
+    gamma: 0.99
+    tau: 0.95
+    use_linear_clip_decay: False
+    use_linear_lr_decay: False
+    # window size for calculating the past rewards
+    reward_window_size: 50
+    use_normalized_advantage: False
+    policy_type: "savnce"
+    use_goal_descriptor: True
+    use_goal_as_target: False
+    use_external_memory: True
+    SCENE_MEMORY_TRANSFORMER:
+      memory_size: 1
+      embedding_size: 256
+      nhead: 8
+      num_encoder_layers: 1
+      num_decoder_layers: 1
+      dropout: 0.1
+      activation: 'relu'
+      use_pretrained: False
+      pretrained_path: ''
+      freeze_encoders: False
+      pretraining: True
+    GOAL_DESCRIPTOR:
+      online_training: True
+      use_goal_descriptor_embedding: True
+      encoding_goal_descriptor: True
+      embedding_size: 256
+      output_format: ACCDDOA # ACCDDOA, MULTI_TASK
+      output_size: 84
+      lr: 1e-3
+      memory_size: 128
+      min_episode_steps: 30
+      audio_goal_uuid: 'binaural_extractor'
+      use_visual_encoding: False
+      use_pose_encoding: True
+      use_action_encoding: True
+      use_pretrained: False
+      pretrained_path: ''
+  DDPPO:
+    sync_frac: 0.6
+    distrib_backend: "NCCL"
+    rnn_type: "GRU"
+    num_recurrent_layers: 1
+    backbone: "custom_resnet18"
+    pretrained_weights: ""
+    pretrained: False
+    reset_critic: False
