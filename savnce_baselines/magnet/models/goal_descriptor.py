@@ -316,7 +316,7 @@ class EpisodicMemory:
         for batch_index in range(self.batch_size): 
             self.episode_embedding[batch_index, self.steps[batch_index]].copy_(step_embedding[batch_index])
             self.episode_padding_mask[batch_index, self.steps[batch_index]] = False
-            self.steps[batch_index] = self.steps[batch_index] + 1 % self.memory_size
+            self.steps[batch_index] = self.steps[batch_index] + 1
         return self.episode_embedding, self.episode_padding_mask
 
     def after_update(self, step_done_mask):

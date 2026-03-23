@@ -15,7 +15,7 @@
 </div>
 
 <p align="center">
-  <a href="#">
+  <a href="https://arxiv.org/abs/2603.19660">
     <img src="https://img.shields.io/badge/arXiv-Paper-red?logo=arxiv&logoColor=white">
   </a>
   <a href="https://github.com/bjzgcai">
@@ -23,7 +23,7 @@
   </a>
 </p>
 
-## Motivation
+## 📖 Introduction
 Audio-visual navigation enables embodied agents to navigate toward sound-emitting targets by leveraging both auditory and visual cues.
 However, most existing approaches depend on precomputed room impulse responses (RIRs) for binaural audio rendering, restricting agents to discrete grid positions and leading to spatially discontinuous observations.
 
@@ -31,20 +31,23 @@ However, most existing approaches depend on precomputed room impulse responses (
 
 To establish a more realistic setting, we introduce Semantic Audio-Visual Navigation in Continuous Environments (SAVN-CE), where agents can move freely in 3D spaces and perceive temporally and spatially coherent audio-visual streams.
 In this setting, targets may intermittently become silent or stop emitting sound entirely, causing agents to lose goal information.
+
+<p align="center"><img src="assets/figs/fig1.png" width="90%"></p>
+
 To tackle this challenge, we propose MAGNet, a multimodal transformer-based model that jointly encodes spatial and semantic goal representations and integrates historical context with self-motion cues to enable memory-augmented goal reasoning.
 
-<p align="center"><img src="assets/figs/fig1.png" width="100%"></p>
+<p align="center"><img src="assets/figs/fig2.png" width="90%"></p>
 
 Comprehensive experiments demonstrate that MAGNet significantly outperforms state-of-the-art methods, achieving up to a **12.1\%** absolute improvement in success rate.
 These results also highlight its robustness to short-duration sounds and long-distance navigation scenarios.
 
-<p align="center"><img src="assets/figs/fig2.png" width="90%"></p>
+<p align="center"><img src="assets/figs/fig3.png" width="90%"></p>
 
-## Installation
+## 📦 Installation
 
 Follow the [installation guide](INSTALLATION.md) to set up the environment and prepare data.
 
-## Usage
+## 🚀 Usage
 
 This repository provides audio-visual observation rendering in continuous environments and supports semantic audio-visual embodied navigation task. 
 We extend existing audio-visual navigation methods, including `AV-Nav` and `SAVi`, into continuous environments and introduce our proposed method, `MAGNet`.
@@ -125,9 +128,17 @@ python \
     TASK_CONFIG.SIMULATOR.TYPE "SAVNCE_Simulator" \
     DISPLAY_RESOLUTION 1024
 ```
-Demos are provided in `assets/demos`. Please refer to the supplementary material for detailed descriptions.
 
-## Tips
+## 🎥 Example Videos
+
+| Video | Content |
+| :--- | :--- |
+| [`assets/demo1.mp4`](assets/demo1.mp4) | MAGNet accurately estimates both the spatial location and semantic category of the goal while it is emitting sound. |
+| [`assets/demo2.mp4`](assets/demo2.mp4) | MAGNet persistently maintains and updates goal information even after the goal stops emitting sound. |
+
+For additional demonstrations, please refer to `assets/demos` and the supplementary material.
+
+## 💡 Tips
 
 **1.** All learning-based approaches are trained for up to 240M steps, with early stopping applied when no improvement is observed on the validation split for 24M consecutive steps.  
 The total number of update steps is computed as: $N_{steps} = N_{GPU} * N_{env/GPU} * N_{update} * N_{steps/update}$.  
@@ -153,18 +164,23 @@ In total, completing all training and evaluation processes (including our method
 
 Ensure that `NUM_PROCESSES` is divisible by `num_mini_batch`. 
 
-## Acknowledgement
+## 📬 Contact
+
+If you have any questions, feel free to open an issue or contact:
+- Yichen Zeng, email: zengyichen@whu.edu.cn
+
+## 🙏 Acknowledgement
 
 This project builds upon [Habitat-Sim](https://github.com/facebookresearch/habitat-sim), [Habitat-Lab](https://github.com/facebookresearch/habitat-lab) and [SoundSpaces](https://github.com/facebookresearch/sound-spaces). We extend these frameworks to support semantic audio-visual navigation in continuous environments. Portions of the implementation of `MAGNet` are adapted from the official code [DCASE2024 SELD Baseline](https://github.com/partha2409/DCASE2024_seld_baseline) and [ENMus](https://github.com/ZhanboShiAI/ENMuS). We sincerely thank the original authors for making their work publicly available.
 
-## Citation
+## 📄 Citation
 
-If you use `SAVN-CE` or `MAGNet` in your research, please cite our [paper]():
+If you find `SAVN-CE` or `MAGNet` useful in your research, please cite our paper:
 
 ```
 @inproceedings{zeng26semantic,
   title     = {Semantic Audio-Visual Navigation in Continuous Environments},
-  author    = {Zeng, Yichen and Wanghe, Baixu and Liu, Meng and Zhou, Yu and Chen, Kehan and Gao, Chen and Huang, Gongping},
+  author    = {Zeng, Yichen and Wang, Hebaixu and Liu, Meng and Zhou, Yu and Chen, Kehan and Gao, Chen and Huang, Gongping},
   booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year      = {2026}
 }
@@ -172,7 +188,7 @@ If you use `SAVN-CE` or `MAGNet` in your research, please cite our [paper]():
 
 If you use any of the 3D scene assets ([MatterPort3D](https://niessner.github.io/Matterport/), [Replica](https://github.com/facebookresearch/Replica-Dataset), [HM3D](https://aihabitat.org/datasets/hm3d/), [Gibson](http://gibsonenv.stanford.edu/database/), etc.), please cite the corresponding dataset papers as well.
 
-## License
+## ⚖️ License
 
 SAVN-CE is released under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/), as found in the [LICENSE](LICENSE) file.
 
