@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 
 # Modifications Copyright (c) 2026 Yichen Zeng, Wuhan University, Email: zengyichen@whu.edu.cn
-# Description: Adapted for semantic audio-visual navigation in continuous environment (SAVN-CE).
+# Description: Adapted for semantic audio-visual navigation in continuous environments (SAVN-CE).
 
 import os
 import time
@@ -753,12 +753,12 @@ class PPOTrainer(BaseRLTrainer):
 
             descriptor_pred_gt = [[] for _ in range(self.config.NUM_PROCESSES)]
             for i in range(len(descriptor_pred_gt)):
-                descriptor_pred = batch['goal_descriptor'].cpu().numpy()[i][ppo_cfg.GOAL_DESCRIPTOR.embedding_size:]
+                descriptor_pred = batch['goal_descriptor'][i].cpu().numpy()[ppo_cfg.GOAL_DESCRIPTOR.embedding_size:]
                 if ppo_cfg.GOAL_DESCRIPTOR.output_format == 'ACCDDOA':
-                    descriptor_gt = batch['oracle_accddoa'].cpu().numpy()[i]
+                    descriptor_gt = batch['oracle_accddoa'][i].cpu().numpy()
                 elif ppo_cfg.GOAL_DESCRIPTOR.output_format == 'MULTI_TASK':
                     descriptor_gt = np.concatenate(
-                        [batch['oracle_category'].cpu().numpy()[i], batch['oracle_position'].cpu().numpy()[i]], 
+                        [batch['oracle_category'][i].cpu().numpy(), batch['oracle_position'][i].cpu().numpy()], 
                         axis=-1
                     )
                 else:
@@ -824,12 +824,12 @@ class PPOTrainer(BaseRLTrainer):
                 self.goal_descriptor.update(batch, dones, prev_actions)
 
                 for i in range(len(descriptor_pred_gt)):
-                    descriptor_pred = batch['goal_descriptor'].cpu().numpy()[i][ppo_cfg.GOAL_DESCRIPTOR.embedding_size:]
+                    descriptor_pred = batch['goal_descriptor'][i].cpu().numpy()[ppo_cfg.GOAL_DESCRIPTOR.embedding_size:]
                     if ppo_cfg.GOAL_DESCRIPTOR.output_format == 'ACCDDOA':
-                        descriptor_gt = batch['oracle_accddoa'].cpu().numpy()[i]
+                        descriptor_gt = batch['oracle_accddoa'][i].cpu().numpy()
                     elif ppo_cfg.GOAL_DESCRIPTOR.output_format == 'MULTI_TASK':
                         descriptor_gt = np.concatenate(
-                            [batch['oracle_category'].cpu().numpy()[i], batch['oracle_position'].cpu().numpy()[i]],
+                            [batch['oracle_category'][i].cpu().numpy(), batch['oracle_position'][i].cpu().numpy()],
                             axis=-1
                         )
                     if dones[i]:

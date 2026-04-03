@@ -2,7 +2,7 @@
 # Test script: evaluate best validation checkpoint on test split.
 # Uncomment one block below, set task/exp_id/model_dir, and run.
 
-export HABITAT_SIM_LOG='warning'
+export HABITAT_SIM_LOG='quiet'
 export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- Usage notes ---

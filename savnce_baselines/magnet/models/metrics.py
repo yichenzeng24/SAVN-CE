@@ -12,7 +12,7 @@
 #
 
 # Modifications Copyright (c) 2026 Yichen Zeng, Wuhan University, Email: zengyichen@whu.edu.cn
-# Description: Adapted for semantic audio-visual navigation in continuous environment (SAVN-CE).
+# Description: Adapted for semantic audio-visual navigation in continuous environments (SAVN-CE).
 
 
 import numpy as np

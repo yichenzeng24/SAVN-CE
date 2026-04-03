@@ -23,9 +23,9 @@
   </a>
 </p>
 
-## 📖 Introduction
+## 📖 Overview
 Audio-visual navigation enables embodied agents to navigate toward sound-emitting targets by leveraging both auditory and visual cues.
-However, most existing approaches depend on precomputed room impulse responses (RIRs) for binaural audio rendering, restricting agents to discrete grid positions and leading to spatially discontinuous observations.
+However, most existing approaches rely on precomputed room impulse responses (RIRs) for binaural audio rendering, restricting agents to discrete grid positions and leading to spatially discontinuous observations.
 
 <p align="center"><img src="assets/figs/fig0.png" width="80%"></p>
 
@@ -171,7 +171,7 @@ If you have any questions, feel free to open an issue or contact:
 
 ## 🙏 Acknowledgement
 
-This project builds upon [Habitat-Sim](https://github.com/facebookresearch/habitat-sim), [Habitat-Lab](https://github.com/facebookresearch/habitat-lab) and [SoundSpaces](https://github.com/facebookresearch/sound-spaces). We extend these frameworks to support semantic audio-visual navigation in continuous environments. Portions of the implementation of `MAGNet` are adapted from the official code [DCASE2024 SELD Baseline](https://github.com/partha2409/DCASE2024_seld_baseline) and [ENMus](https://github.com/ZhanboShiAI/ENMuS). We sincerely thank the original authors for making their work publicly available.
+This project builds upon [Habitat-Sim](https://github.com/facebookresearch/habitat-sim), [Habitat-Lab](https://github.com/facebookresearch/habitat-lab) and [SoundSpaces](https://github.com/facebookresearch/sound-spaces). We extend these frameworks to support semantic audio-visual navigation in continuous environments. Portions of the implementation of `MAGNet` are adapted from the official code [DCASE2024 SELD Baseline](https://github.com/partha2409/DCASE2024_seld_baseline) and [ENMuS](https://github.com/ZhanboShiAI/ENMuS). We sincerely thank the original authors for making their work publicly available.
 
 ## 📄 Citation
 

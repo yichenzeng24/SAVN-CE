@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2026 Yichen Zeng, Wuhan University
-# Description: Adapted for semantic audio-visual navigation in continuous environment (SAVN-CE).
+# Copyright (c) 2026 Yichen Zeng, Wuhan University, Email: zengyichen@whu.edu.cn
+# Description: Adapted for semantic audio-visual navigation in continuous environments (SAVN-CE).
 
 import math
 import torch

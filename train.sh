@@ -4,7 +4,7 @@
 
 port=${1:-29500}
 
-export HABITAT_SIM_LOG='warning'
+export HABITAT_SIM_LOG='quiet'
 export PYTHONPATH="$PYTHONPATH:$(pwd)"
 export MASTER_PORT=${port}
 

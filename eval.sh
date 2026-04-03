@@ -2,7 +2,7 @@
 # Evaluation script: run validation over checkpoints and get validation curves.
 # Uncomment one block below, set task/exp_id/model_dir, and run.
 
-export HABITAT_SIM_LOG='warning'
+export HABITAT_SIM_LOG='quiet'
 export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- Eval pretraining checkpoints ---

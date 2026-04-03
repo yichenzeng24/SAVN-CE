@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 
 # Modifications Copyright (c) 2026 Yichen Zeng, Wuhan University, Email: zengyichen@whu.edu.cn
-# Description: Adapted for semantic audio-visual navigation in continuous environment (SAVN-CE).
+# Description: Adapted for semantic audio-visual navigation in continuous environments (SAVN-CE).
 
 import os
 import time
@@ -796,12 +796,12 @@ class PPOTrainer(BaseRLTrainer):
 
             descriptor_pred_gt = [[] for _ in range(self.config.NUM_PROCESSES)]
             for i in range(len(descriptor_pred_gt)):
-                # category_prediction = np.argmax(batch['category_belief'].cpu().numpy()[i])
-                category_prediction = batch['category_belief'].cpu().numpy()[i]
-                location_prediction = batch['location_belief'].cpu().numpy()[i]
-                # category_gt = np.argmax(batch['category'].cpu().numpy()[i])
-                category_gt = batch['category'].cpu().numpy()[i]
-                location_gt = batch['pointgoal_with_gps_compass'].cpu().numpy()[i]
+                # category_prediction = np.argmax(batch['category_belief'][i].cpu().numpy())
+                category_prediction = batch['category_belief'][i].cpu().numpy()
+                location_prediction = batch['location_belief'][i].cpu().numpy()
+                # category_gt = np.argmax(batch['category'][i].cpu().numpy())
+                category_gt = batch['category'][i].cpu().numpy()
+                location_gt = batch['pointgoal_with_gps_compass'][i].cpu().numpy()
                 geodesic_distance = -1
                 pair = (category_prediction, location_prediction, category_gt, location_gt, geodesic_distance)
                 if 'view_point_goals' in observations[i]:
@@ -865,12 +865,12 @@ class PPOTrainer(BaseRLTrainer):
                 self.belief_predictor.update(batch, dones)
 
                 for i in range(len(descriptor_pred_gt)):
-                    # category_prediction = np.argmax(batch['category_belief'].cpu().numpy()[i])
-                    category_prediction = batch['category_belief'].cpu().numpy()[i]
-                    location_prediction = batch['location_belief'].cpu().numpy()[i]
-                    # category_gt = np.argmax(batch['category'].cpu().numpy()[i])
-                    category_gt = batch['category'].cpu().numpy()[i]
-                    location_gt = batch['pointgoal_with_gps_compass'].cpu().numpy()[i]
+                    # category_prediction = np.argmax(batch['category_belief'][i].cpu().numpy())
+                    category_prediction = batch['category_belief'][i].cpu().numpy()
+                    location_prediction = batch['location_belief'][i].cpu().numpy()
+                    # category_gt = np.argmax(batch['category'][i].cpu().numpy())
+                    category_gt = batch['category'][i].cpu().numpy()
+                    location_gt = batch['pointgoal_with_gps_compass'][i].cpu().numpy()
                     if dones[i]:
                         geodesic_distance = -1
                     else:

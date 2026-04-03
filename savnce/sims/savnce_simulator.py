@@ -5,7 +5,7 @@
 # LICENSE file in the root directory of this source tree.
 
 # Modifications Copyright (c) 2026 Yichen Zeng, Wuhan University, Email: zengyichen@whu.edu.cn
-# Description: Adapted for semantic audio-visual navigation in continuous environment (SAVN-CE).
+# Description: Adapted for semantic audio-visual navigation in continuous environments (SAVN-CE).
 
 import glob
 from typing import Any, List, Optional
@@ -359,10 +359,13 @@ class SAVNCE_DummySimulator(Simulator, ABC):
 class SAVNCE_Simulator(Simulator, ABC):
     r"""Changes made to simulator wrapper over habitat-sim
 
-    This simulator is adapted for semantic audio-visual navigation in continuous environment (SAVN-CE). 
-    1. The agent can move anywhere navigable in the continuous environment and collect audio-visual observations rather than move among predefined nodes, but the action space is still defined discretely.
-    3. The action space is forward 0.25m, turn left 15 degrees, turn right 15 degrees and stop.
-    4. The heavy precomputed binaural RIRs are not needed anymore, but the simulation would be slower due to the RIR computation on the fly.
+    This simulator is adapted for semantic audio-visual navigation in continuous environments (SAVN-CE). 
+    1. The agent can move anywhere navigable in the continuous environment
+    and collect audio-visual observations rather than move among predefined nodes,
+    but the action space is still defined discretely.
+    2. The action space is forward 0.25m, turn left 15 degrees, turn right 15 degrees and stop.
+    3. The heavy precomputed binaural RIRs are not needed anymore,
+    but the simulation would be slower due to the RIR computation on the fly.
     Args:
         config: configuration for initializing the simulator.
     """
@@ -750,14 +753,12 @@ class SAVNCE_Simulator(Simulator, ABC):
         self._episode_step_count += 1
         self._audio_index = self._episode_step_count * self._num_samples_per_step
         logging.debug(f'Episode step count: {self._episode_step_count}, sample index: {self._audio_index}')
-        self._sim._sensors[self._audio_goal_sensor_uuid]._episode_step = self._episode_step_count
         self._current_sound_sample_index = int(self._current_sound_sample_index + 
                                                self._num_samples_per_step) % self.current_source_sound.shape[0]
         logging.debug(f'Current sound sample index: {self._current_sound_sample_index}')
         if self._audio_distractor_sensor_enabled:
             self._current_distractor_sample_index = int(self._current_distractor_sample_index + 
                                                         self._num_samples_per_step) % self.current_distractor_sound.shape[0]
-            self._sim._sensors[self._audio_distractor_sensor_uuid]._episode_step = self._episode_step_count
             logging.debug(f'Current distractor sample index: {self._current_distractor_sample_index}')
         if self.config.AUDIO.HAS_NOISE_SOUND:
             self._current_noise_sample_index = int(self._current_noise_sample_index + 
@@ -836,7 +837,12 @@ class SAVNCE_Simulator(Simulator, ABC):
             end_index = start_index + self._num_samples_per_step
             if end_index > sound_length:
                 end_index = start_index + self._num_samples_per_step - sound_length
-                sound_segment = np.concatenate([self.current_source_sound[start_index:], self.current_source_sound[: end_index]])
+                sound_segment = np.concatenate(
+                    [
+                        self.current_source_sound[start_index:],
+                        self.current_source_sound[: end_index]
+                    ]
+                )
             else:
                 sound_segment = self.current_source_sound[start_index: end_index]
             audio_end_index = self._audio_index + self._num_samples_per_step + goal_rir.shape[0] - 1
@@ -852,7 +858,12 @@ class SAVNCE_Simulator(Simulator, ABC):
                 end_index = start_index + self._num_samples_per_step
                 if end_index > sound_length:
                     end_index = start_index + self._num_samples_per_step - sound_length
-                    sound_segment = np.concatenate([self.current_distractor_sound[start_index:], self.current_distractor_sound[: end_index]])
+                    sound_segment = np.concatenate(
+                        [
+                            self.current_distractor_sound[start_index:],
+                            self.current_distractor_sound[: end_index]
+                        ]
+                    )
                 else:
                     sound_segment = self.current_distractor_sound[start_index: end_index]
                 audio_end_index = self._audio_index + self._num_samples_per_step + distractor_rir.shape[0] - 1

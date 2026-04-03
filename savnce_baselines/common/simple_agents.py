@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 
 # Modifications Copyright (c) 2026 Yichen Zeng, Wuhan University, Email: zengyichen@whu.edu.cn
-# Description: Adapted for semantic audio-visual navigation in continuous environment (SAVN-CE).
+# Description: Adapted for semantic audio-visual navigation in continuous environments (SAVN-CE).
 
 import os
 import argparse
@@ -25,7 +25,14 @@ from savnce_baselines.av_nav.config.default import get_task_config as get_config
 
 
 class RandomAgent(habitat.Agent):
-    def __init__(self, success_distance, goal_sensor_uuid, perfect_stop = False, prob = None, logger = None):
+    def __init__( 
+        self,
+        success_distance,
+        goal_sensor_uuid,
+        perfect_stop=False,
+        prob=None,
+        logger=None
+    ):
         self.dist_threshold_to_stop = success_distance
         self.goal_sensor_uuid = goal_sensor_uuid
         self.perfect_stop = perfect_stop
@@ -79,8 +86,15 @@ class ForwardOnlyAgent(RandomAgent):
 
 
 class RandomForwardAgent(RandomAgent):
-    def __init__(self, success_distance, goal_sensor_uuid, perfect_stop = False, prob = None):
-        super().__init__(success_distance, goal_sensor_uuid, perfect_stop, prob)
+    def __init__(
+        self,
+        success_distance,
+        goal_sensor_uuid,
+        perfect_stop=False,
+        prob=None,
+        logger=None
+    ):
+        super().__init__(success_distance, goal_sensor_uuid, perfect_stop, prob, logger)
         self.FORWARD_PROBABILITY = prob[0] if prob is not None else 0.8
 
     def act(self, observations):
@@ -98,8 +112,15 @@ class RandomForwardAgent(RandomAgent):
 
 
 class GoalFollower(RandomAgent):
-    def __init__(self, success_distance, goal_sensor_uuid, perfect_stop = False, prob = None):
-        super().__init__(success_distance, goal_sensor_uuid, perfect_stop, prob)
+    def __init__(
+        self,
+        success_distance,
+        goal_sensor_uuid,
+        perfect_stop=False,
+        prob=None,
+        logger=None
+    ):
+        super().__init__(success_distance, goal_sensor_uuid, perfect_stop, prob, logger)
         self.pos_th = self.dist_threshold_to_stop
         self.angle_th = float(np.deg2rad(15))
         self.random_prob = 0

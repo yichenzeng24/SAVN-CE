@@ -7,7 +7,7 @@
 # LICENSE file in the root directory of this source tree.
 
 # Modifications Copyright (c) 2026 Yichen Zeng, Wuhan University, Email: zengyichen@whu.edu.cn
-# Description: Adapted for semantic audio-visual navigation in continuous environment (SAVN-CE).
+# Description: Adapted for semantic audio-visual navigation in continuous environments (SAVN-CE).
 
 import glob
 import os
@@ -82,11 +82,16 @@ class AudioGoalDataset(Dataset):
             audio_data = normalize_audio(audio_data)
             self.distractor_sound_list.append(audio_data)
 
-    def compute_audiogoal(self, source_rir, source_sound, distractor_rir=None, distractor_sound=None, num_samples_per_step=4000):
+    def compute_audiogoal(
+        self,
+        source_rir,
+        source_sound,
+        distractor_rir=None,
+        distractor_sound=None,
+        num_samples_per_step=4000
+    ):
         """
-        Given sound_segment with length L1 and rir with length L2, the length of the convolved signal is L1 + L2 - 1.
-        _filtered_source_signal and _filtered_distractor_signal are not updated if _episode_step_count 
-        is not between the goal's onset and offset step.
+        Given source sound and rir, compute the audiogoal.
         Args:
             rir: (num_channels, rir_length)
             sound: (sound_length,)
