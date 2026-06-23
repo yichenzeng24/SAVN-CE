@@ -8,21 +8,21 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 # --- Eval pretraining checkpoints ---
 
 task=savnce_pretraining
-exp_id=0225_smt_audio
+exp_id=smt_audio
 model_dir=data/models/${task}/${exp_id}
 
-CUDA_VISIBLE_DEVICES=1 \
+CUDA_VISIBLE_DEVICES=0 \
 python \
     savnce_baselines/savi/run.py \
     --run-type eval \
     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean_pretraining.yaml \
     --model-dir ${model_dir} \
-    --prev-ckpt-ind -1 \
+    --prev-ckpt-ind 0 \
     --eval-interval 2
 
 
 # task=savnce_pretraining
-# exp_id=0225_savi
+# exp_id=savi
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -36,7 +36,7 @@ python \
 
 
 # task=savnce_pretraining
-# exp_id=0225_oracle_accddoa
+# exp_id=oracle_accddoa
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -50,7 +50,7 @@ python \
 
 
 # task=savnce_pretraining
-# exp_id=0225_oracle_accddoa_everlasting
+# exp_id=oracle_accddoa_everlasting
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -65,7 +65,7 @@ python \
 
 
 # task=savnce_pretraining
-# exp_id=0225_magnet
+# exp_id=magnet
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -82,7 +82,7 @@ python \
 # --- Eval training checkpoints ---
 
 # task=savnce
-# exp_id=0225_av_nav
+# exp_id=av_nav
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -96,21 +96,7 @@ python \
 
 
 # task=savnce
-# exp_id=0225_smt_audio
-# model_dir=data/models/${task}/${exp_id}
-
-# CUDA_VISIBLE_DEVICES=1 \
-# python \
-#     savnce_baselines/savi/run.py \
-#     --run-type eval \
-#     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean.yaml \
-#     --model-dir ${model_dir} \
-#     --prev-ckpt-ind 0 \
-#     --eval-interval 2
-
-
-# task=savnce
-# exp_id=0225_savi
+# exp_id=smt_audio
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -124,7 +110,21 @@ python \
 
 
 # task=savnce
-# exp_id=0225_oracle_accddoa
+# exp_id=savi
+# model_dir=data/models/${task}/${exp_id}
+
+# CUDA_VISIBLE_DEVICES=0 \
+# python \
+#     savnce_baselines/savi/run.py \
+#     --run-type eval \
+#     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean.yaml \
+#     --model-dir ${model_dir} \
+#     --prev-ckpt-ind 0 \
+#     --eval-interval 2
+
+
+# task=savnce
+# exp_id=oracle_accddoa
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -138,7 +138,7 @@ python \
 
 
 # task=savnce
-# exp_id=0225_oracle_accddoa_everlasting
+# exp_id=oracle_accddoa_everlasting
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -153,7 +153,7 @@ python \
 
 
 # task=savnce
-# exp_id=0225_magnet
+# exp_id=magnet
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \

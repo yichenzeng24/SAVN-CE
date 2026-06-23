@@ -35,7 +35,7 @@ export MASTER_PORT=${port}
 
 # --- smt_audio ---
 # task=savnce_pretraining
-# exp_id=0225_smt_audio
+# exp_id=smt_audio
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -49,7 +49,7 @@ export MASTER_PORT=${port}
 
 # --- savi ---
 # task=savnce_pretraining
-# exp_id=0225_savi
+# exp_id=savi
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -63,7 +63,7 @@ export MASTER_PORT=${port}
 
 # --- oracle_accddoa ---
 # task=savnce_pretraining
-# exp_id=0225_oracle_accddoa
+# exp_id=oracle_accddoa
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -77,7 +77,7 @@ export MASTER_PORT=${port}
 
 # --- oracle_accddoa_everlasting ---
 # task=savnce_pretraining
-# exp_id=0225_oracle_accddoa_everlasting
+# exp_id=oracle_accddoa_everlasting
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -92,7 +92,7 @@ export MASTER_PORT=${port}
 
 # --- magnet ---
 # task=savnce_pretraining
-# exp_id=0225_magnet
+# exp_id=magnet
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \

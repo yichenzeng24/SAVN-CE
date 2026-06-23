@@ -10,7 +10,7 @@ export MASTER_PORT=${port}
 
 # --- av_nav ---
 # task=savnce
-# exp_id=0225_av_nav
+# exp_id=av_nav
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -24,7 +24,7 @@ export MASTER_PORT=${port}
 
 # --- smt_audio ---
 # task=savnce
-# exp_id=0225_smt_audio
+# exp_id=smt_audio
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -36,11 +36,11 @@ export MASTER_PORT=${port}
 #     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean.yaml \
 #     --model-dir ${model_dir} \
 #     RL.DDPPO.pretrained True \
-#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/0225_smt_audio/data/ckpt.xxx.pth
+#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/smt_audio/data/ckpt.xxx.pth
 
 # --- savi ---
 # task=savnce
-# exp_id=0225_savi
+# exp_id=savi
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -52,11 +52,11 @@ export MASTER_PORT=${port}
 #     --exp-config savnce_baselines/savi/config/mp3d/rgbd_ddppo_clean.yaml \
 #     --model-dir ${model_dir} \
 #     RL.DDPPO.pretrained True \
-#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/0225_savi/data/ckpt.xxx.pth
+#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/savi/data/ckpt.xxx.pth
 
 # --- oracle_accddoa ---
 # task=savnce
-# exp_id=0225_oracle_accddoa
+# exp_id=oracle_accddoa
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -68,11 +68,11 @@ export MASTER_PORT=${port}
 #     --exp-config savnce_baselines/magnet/config/mp3d/rgbd_ddppo_benchmark.yaml \
 #     --model-dir ${model_dir} \
 #     RL.DDPPO.pretrained True \
-#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/0225_oracle_accddoa/data/ckpt.xxx.pth
+#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/oracle_accddoa/data/ckpt.xxx.pth
 
 # --- oracle_accddoa_everlasting ---
 # task=savnce
-# exp_id=0225_oracle_accddoa_everlasting
+# exp_id=oracle_accddoa_everlasting
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -85,11 +85,11 @@ export MASTER_PORT=${port}
 #     --model-dir ${model_dir} \
 #     TASK_CONFIG.TASK.ORACLE_ACCDDOA_SENSOR.EVERLASTING True \
 #     RL.DDPPO.pretrained True \
-#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/0225_oracle_accddoa_everlasting/data/ckpt.xxx.pth
+#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/oracle_accddoa_everlasting/data/ckpt.xxx.pth
 
 # --- magnet ---
 # task=savnce
-# exp_id=0225_magnet
+# exp_id=magnet
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0,1,2,3 \
@@ -101,4 +101,4 @@ export MASTER_PORT=${port}
 #     --exp-config savnce_baselines/magnet/config/mp3d/rgbd_ddppo_clean.yaml \
 #     --model-dir ${model_dir} \
 #     RL.DDPPO.pretrained True \
-#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/0225_magnet/data/ckpt.xxx.pth
+#     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/magnet/data/ckpt.xxx.pth

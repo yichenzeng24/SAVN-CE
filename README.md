@@ -182,6 +182,7 @@ If you find `SAVN-CE` or `MAGNet` useful in your research, please cite our paper
   title     = {Semantic Audio-Visual Navigation in Continuous Environments},
   author    = {Zeng, Yichen and Wang, Hebaixu and Liu, Meng and Zhou, Yu and Chen, Kehan and Gao, Chen and Huang, Gongping},
   booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  pages     = {22369--22379},
   year      = {2026}
 }
 ```

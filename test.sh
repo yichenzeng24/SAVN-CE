@@ -12,7 +12,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- av_nav ---
 # task=savnce
-# exp_id=0225_av_nav
+# exp_id=av_nav
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -28,10 +28,10 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- smt_audio ---
 # task=savnce
-# exp_id=0225_smt_audio
+# exp_id=smt_audio
 # model_dir=data/models/${task}/${exp_id}
 
-# CUDA_VISIBLE_DEVICES=1 \
+# CUDA_VISIBLE_DEVICES=0 \
 # python \
 #     savnce_baselines/savi/run.py \
 #     --run-type test \
@@ -44,7 +44,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- savi ---
 # task=savnce
-# exp_id=0225_savi
+# exp_id=savi
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -60,7 +60,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- oracle_accddoa ---
 # task=savnce
-# exp_id=0225_oracle_accddoa
+# exp_id=oracle_accddoa
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -76,7 +76,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- oracle_accddoa_everlasting ---
 # task=savnce
-# exp_id=0225_oracle_accddoa_everlasting
+# exp_id=oracle_accddoa_everlasting
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \
@@ -93,7 +93,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- magnet ---
 # task=savnce
-# exp_id=0225_magnet
+# exp_id=magnet
 # model_dir=data/models/${task}/${exp_id}
 
 # CUDA_VISIBLE_DEVICES=0 \

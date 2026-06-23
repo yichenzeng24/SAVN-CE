@@ -199,8 +199,10 @@ class SELDMetrics(BaseMetrics):
                 gt_batch = self.accddoa_format_to_dcase_format(labels[batch_cnt])
             else:
                 raise ValueError(f"Invalid label format: {label_format}")
-            pred_batch = self.organize_labels(pred_batch)
-            gt_batch = self.organize_labels(gt_batch)
+            keys = list(pred_batch.keys()) + list(gt_batch.keys())
+            max_frames = max(keys) if len(keys) > 0 else 2000
+            pred_batch = self.organize_labels(pred_batch, max_frames)
+            gt_batch = self.organize_labels(gt_batch, max_frames)
 
             assignations = [{} for i in range(self._num_classes)]
             assignations_pre = [{} for i in range(self._num_classes)]
