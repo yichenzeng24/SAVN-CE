@@ -8,8 +8,8 @@
   <a href='https://scholar.google.com/citations?hl=en&user=OXks3skAAAAJ' target="_blank">Hebaixu Wang</a>,
   <a href='https://scholar.google.com/citations?hl=en&user=tI_cTV8AAAAJ' target="_blank">Meng Liu</a>,
   <a href='https://scholar.google.com/citations?hl=en&user=FNfBHg8AAAAJ' target="_blank">Yu Zhou</a>,
-  <a href='https://scholar.google.com/citations?hl=en&user=6esEV50AAAAJ' target="_blank">Kehan Chen</a>,
   <a href='https://scholar.google.com/citations?hl=en&user=Af60_cEAAAAJ' target="_blank">Chen Gao</a>,
+  <a href='https://scholar.google.com/citations?hl=en&user=6esEV50AAAAJ' target="_blank">Kehan Chen</a>,
   <a href='https://scholar.google.com/citations?hl=en&user=a3x1k7kAAAAJ' target="_blank">Gongping Huang</a>
 </p>
 </div>
@@ -75,7 +75,7 @@ python \
     savnce_baselines/magnet/run.py \
     --run-type eval \
     --exp-config savnce_baselines/magnet/config/mp3d/rgbd_ddppo_clean_pretraining.yaml \
-    --model-dir data/models/savnce/magnet \
+    --model-dir data/models/savnce_pretraining/magnet \
     --prev-ckpt-ind 0 \
     --eval-interval 2
 ```
@@ -180,7 +180,7 @@ If you find `SAVN-CE` or `MAGNet` useful in your research, please cite our paper
 ```
 @inproceedings{zeng26semantic,
   title     = {Semantic Audio-Visual Navigation in Continuous Environments},
-  author    = {Zeng, Yichen and Wang, Hebaixu and Liu, Meng and Zhou, Yu and Chen, Kehan and Gao, Chen and Huang, Gongping},
+  author    = {Zeng, Yichen and Wang, Hebaixu and Liu, Meng and Zhou, Yu and Gao, Chen and Chen, Kehan and Huang, Gongping},
   booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   pages     = {22369--22379},
   year      = {2026}
