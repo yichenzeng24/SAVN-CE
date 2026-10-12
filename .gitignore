@@ -3,6 +3,7 @@ build/
 dist/
 
 **/__pycache__/
+**/*.pyc
 .vscode/
 *.egg-info/
 *.wav

@@ -31,7 +31,7 @@ def main():
         "--exp-config",
         type=str,
         # required=True,
-        default='savnce_baselines/savnce/config/mp3d/rgbd_ddppo_clean_train.yaml',
+        default='savnce_baselines/magnet/config/mp3d/rgbd_ddppo_clean.yaml',
         help="path to config yaml containing info about experiment",
     )
     parser.add_argument(

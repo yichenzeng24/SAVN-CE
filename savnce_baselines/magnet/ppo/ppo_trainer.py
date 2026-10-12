@@ -49,7 +49,7 @@ from savnce_baselines.common.ddp_utils import (
     save_interrupted_state,
 )
 from savnce_baselines.magnet.models.goal_descriptor import GoalDescriptor
-from savnce_baselines.magnet.ppo.policy import SAVNCE_Policy
+from savnce_baselines.magnet.ppo.policy import MAGNetPolicy
 from savnce_baselines.magnet.ppo.ppo import PPO
 from savnce_baselines.magnet.models.rollout_storage import RolloutStorage, ExternalMemory
 
@@ -62,7 +62,7 @@ class DataParallelPassthrough(torch.nn.DataParallel):
             return getattr(self.module, name)
 
 
-@baseline_registry.register_trainer(name="savnce_ppo")
+@baseline_registry.register_trainer(name="magnet_ppo")
 class PPOTrainer(BaseRLTrainer):
     r"""Trainer class for PPO algorithm
     Paper: https://arxiv.org/abs/1707.06347.
@@ -95,7 +95,7 @@ class PPOTrainer(BaseRLTrainer):
         has_distractor_sound = self.config.TASK_CONFIG.SIMULATOR.AUDIO.HAS_DISTRACTOR_SOUND
         smt_cfg = ppo_cfg.SCENE_MEMORY_TRANSFORMER
         goal_descriptor_cfg = ppo_cfg.GOAL_DESCRIPTOR
-        self.actor_critic = SAVNCE_Policy(
+        self.actor_critic = MAGNetPolicy(
             observation_space=self.envs.observation_spaces[0],
             action_space=self.action_space,
             smt_cfg=smt_cfg,
@@ -128,12 +128,6 @@ class PPOTrainer(BaseRLTrainer):
             eps=ppo_cfg.eps,
             max_grad_norm=ppo_cfg.max_grad_norm,
         )
-
-        if self.config.RESUME:
-            ckpt_dict = self.load_checkpoint('data/models/smt_with_pose/ckpt.400.pth', map_location="cpu")
-            self.agent.actor_critic.net.visual_encoder.load_state_dict(self.search_dict(ckpt_dict, 'visual_encoder'))
-            self.agent.actor_critic.net.goal_encoder.load_state_dict(self.search_dict(ckpt_dict, 'goal_encoder'))
-            self.agent.actor_critic.net.action_encoder.load_state_dict(self.search_dict(ckpt_dict, 'action_encoder'))
 
         if ppo_cfg.use_external_memory and smt_cfg.freeze_encoders:
             self._static_smt_encoder = True

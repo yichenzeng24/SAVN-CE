@@ -106,10 +106,10 @@ class CriticHead(nn.Module):
         return self.fc(x)
 
 
-class SAVNCE_Policy(Policy):
+class MAGNetPolicy(Policy):
     def __init__(self, observation_space, action_space, **kwargs):
         super().__init__(
-            SAVNCE_Net(
+            MAGNet(
                 observation_space,
                 action_space,
                 **kwargs
@@ -139,7 +139,7 @@ class Net(nn.Module, metaclass=abc.ABCMeta):
         pass
 
 
-class SAVNCE_Net(Net):
+class MAGNet(Net):
     r"""Network which passes the input image through CNN and concatenates
     goal vector with CNN's output and passes that through RNN. Implements the
     policy from Scene Memory Transformer: https://arxiv.org/abs/1903.03878
@@ -287,7 +287,7 @@ class SAVNCE_Net(Net):
 
     def freeze_encoders(self):
         """Freeze audio, visual, pose and action encoders."""
-        logger.info(f'SAVNCE_Net ===> Freezing all encoders!')
+        logger.info(f'MAGNet ===> Freezing all encoders!')
         params_to_freeze = []
         params_to_freeze.append(self.visual_encoder.parameters())
         params_to_freeze.append(self.action_encoder.parameters())

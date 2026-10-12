@@ -146,37 +146,6 @@ class DDPPOTrainer(PPOTrainer):
 
         self.actor_critic.to(self.device)
 
-        if self.config.RL.DDPPO.pretrained:
-            # load weights for both actor critic and the encoder
-            pretrained_state = torch.load(self.config.RL.DDPPO.pretrained_weights, map_location="cpu", weights_only=False)
-            self.actor_critic.load_state_dict(
-                {
-                    k[len("actor_critic."):]: v
-                    for k, v in pretrained_state["state_dict"].items()
-                    if "actor_critic.net.visual_encoder" not in k and
-                       "actor_critic.net.smt_state_encoder" not in k
-                },
-                strict=False
-            )
-            self.actor_critic.net.visual_encoder.rgb_encoder.load_state_dict(
-                {
-                    k[len("actor_critic.net.visual_encoder.rgb_encoder."):]: v
-                    for k, v in pretrained_state["state_dict"].items()
-                    if "actor_critic.net.visual_encoder.rgb_encoder." in k
-                },
-            )
-            self.actor_critic.net.visual_encoder.depth_encoder.load_state_dict(
-                {
-                    k[len("actor_critic.net.visual_encoder.depth_encoder."):]: v
-                    for k, v in pretrained_state["state_dict"].items()
-                    if "actor_critic.net.visual_encoder.depth_encoder." in k
-                },
-            )
-            logger.info(f"Loaded pretrained weights for actor critic from {self.config.RL.DDPPO.pretrained_weights}")
-            if ppo_cfg.use_belief_predictor and 'belief_predictor' in pretrained_state:
-                self.belief_predictor.load_state_dict(pretrained_state["belief_predictor"])
-                logger.info(f"Loaded pretrained weights for belief predictor from {self.config.RL.DDPPO.pretrained_weights}")
-
         if self.config.RL.DDPPO.reset_critic:
             nn.init.orthogonal_(self.actor_critic.critic.fc.weight)
             nn.init.constant_(self.actor_critic.critic.fc.bias, 0)
@@ -193,6 +162,17 @@ class DDPPOTrainer(PPOTrainer):
             max_grad_norm=ppo_cfg.max_grad_norm,
             use_normalized_advantage=ppo_cfg.use_normalized_advantage,
         )
+
+        if self.config.RL.DDPPO.pretrained:
+            # load weights for both actor critic and the encoder
+            pretrained_state = torch.load(self.config.RL.DDPPO.pretrained_weights, map_location="cpu", weights_only=False)
+            self.agent.load_state_dict(pretrained_state["state_dict"])
+            logger.info(f"Loaded pretrained weights for actor critic from {self.config.RL.DDPPO.pretrained_weights}")
+            # load weights for belief predictor
+            if ppo_cfg.use_belief_predictor:
+                assert 'belief_predictor' in pretrained_state, 'Unable to find belief predictor model weights'
+                self.belief_predictor.load_state_dict(pretrained_state["belief_predictor"])
+                logger.info(f"Loaded pretrained weights for belief predictor from {self.config.RL.DDPPO.pretrained_weights}")
 
     def train(self) -> None:
         r"""Main method for DD-PPO.

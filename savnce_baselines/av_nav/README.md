@@ -8,7 +8,7 @@ This folder contains the `AV-Nav` baseline, an audio-visual navigation model ada
 If you use this model in your research, please cite the following paper:
 ```
 @inproceedings{chen20soundspaces,
-  title     =     {SoundSpaces: Audio-Visual Navigaton in 3D Environments,
+  title     =     {SoundSpaces: Audio-Visual Navigation in 3D Environments},
   author    =     {Changan Chen and Unnat Jain and Carl Schissler and Sebastia Vicenc Amengual Gari and Ziad Al-Halah and Vamsi Krishna Ithapu and Philip Robinson and Kristen Grauman},
   booktitle =     {ECCV},
   year      =     {2020}

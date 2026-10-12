@@ -10,8 +10,6 @@ moviepy==1.0.3
 numba==0.60.0
 numpy==1.26.0
 numpy-quaternion==2022.4.3
-opencv-contrib-python==4.10.0.84
-opencv-python==4.10.0.84
 opencv-python-headless==4.10.0.84
 pillow==11.0.0
 pygame==2.6.1

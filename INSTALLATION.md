@@ -18,6 +18,9 @@ conda activate savnce
 sudo apt update
 sudo apt install libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxft-dev libxext-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcb-xinerama0 libx11-xcb-dev libglu1-mesa
 
+# Install conda dependencies
+pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu126
+
 # Install Habitat-Sim
 git clone https://github.com/facebookresearch/habitat-sim.git
 cd habitat-sim
@@ -37,14 +40,11 @@ Note: You do not need to install Habitat-Lab separately; this repo includes a mo
 ```
 
 ```bash
-# Install Python dependencies
-pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu126
-pip install -r requirements.txt
-
 # Clone and install SAVN-CE
 git clone https://github.com/yichenzeng24/SAVN-CE.git
 cd SAVN-CE
 pip install -e .
+pip install -r requirements.txt
 ```
 
 ## Prepare Data
@@ -69,7 +69,7 @@ The `data` folder should have the following structure:
 ```
 data/
 ├── datasets/                          # Episodes for each split
-│   └── savnce-dataset/
+│   └── savnce_dataset/
 │       └── mp3d/v1/
 │           └── [split]/
 │               ├── [split].json.gz

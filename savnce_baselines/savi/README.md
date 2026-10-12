@@ -16,6 +16,7 @@ python \
   --num-per-scene 1000 \
   --multithread
 ```
+Repeat this command with `--dataset-type val` to generate the validation RIRs.
 
 2. Pretrain the label predictor (or use the pretrained model weights provided with this repository):
 
@@ -27,6 +28,8 @@ python \
 ```
 
 For the `Distracted Environment` setting, add the `--distractor` flag.
+
+After pretraining, copy the best validation checkpoint (`best_val.pth`) to `data/pretrained_ckpts/savi/savi_label_predictor_clean.pth` or `data/pretrained_ckpts/savi/savi_label_predictor_distractor.pth` for the clean or distracted environment, respectively. These paths are expected by `savnce_baselines/savi/models/belief_predictor.py`.
 
 3. Train the SAVi model with DDPPO using the best label predictor checkpoint from step 2 (the location predictor is trained online, following the original implementation). For training and evaluation commands, see the scripts in the repository root: `pretraining.sh`, `eval.sh`, `train.sh`, and `test.sh`.
 

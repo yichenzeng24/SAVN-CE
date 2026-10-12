@@ -33,7 +33,7 @@ RL:
     # window size for calculating the past rewards
     reward_window_size: 50
     use_normalized_advantage: False
-    policy_type: "savnce"
+    policy_type: "magnet"
     use_goal_descriptor: True
     use_goal_as_target: False
     use_external_memory: True

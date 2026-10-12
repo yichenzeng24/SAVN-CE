@@ -16,22 +16,6 @@ export MASTER_PORT=${port}
 # Single GPU: Replace the torchrun block with:
 #   CUDA_VISIBLE_DEVICES=0 python savnce_baselines/<method>/run.py ...
 
-# Pretrained init (for fine-tuning), add the following flags to the training command:
-# av_nav:
-#     RL.PPO.use_pretrained True \
-#     RL.PPO.pretrained_path data/pretrained_weights/av_nav_clean.pth
-# smt_audio:
-#     RL.PPO.SCENE_MEMORY_TRANSFORMER.use_pretrained True \
-#     RL.PPO.SCENE_MEMORY_TRANSFORMER.pretrained_path data/pretrained_weights/smt_audio_clean.pth
-# savi:
-#     RL.PPO.SCENE_MEMORY_TRANSFORMER.use_pretrained True \
-#     RL.PPO.SCENE_MEMORY_TRANSFORMER.pretrained_path data/pretrained_weights/savi_clean.pth
-# magnet:
-#     RL.PPO.SCENE_MEMORY_TRANSFORMER.use_pretrained True \
-#     RL.PPO.SCENE_MEMORY_TRANSFORMER.pretrained_path data/pretrained_weights/magnet_clean.pth \
-#     RL.PPO.GOAL_DESCRIPTOR.use_pretrained True \
-#     RL.PPO.GOAL_DESCRIPTOR.pretrained_path data/pretrained_weights/magnet_clean.pth
-
 
 # --- smt_audio ---
 # task=savnce_pretraining
@@ -47,6 +31,7 @@ export MASTER_PORT=${port}
 #     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean_pretraining.yaml \
 #     --model-dir ${model_dir}
 
+
 # --- savi ---
 # task=savnce_pretraining
 # exp_id=savi
@@ -60,6 +45,7 @@ export MASTER_PORT=${port}
 #     --run-type train \
 #     --exp-config savnce_baselines/savi/config/mp3d/rgbd_ddppo_clean_pretraining.yaml \
 #     --model-dir ${model_dir}
+
 
 # --- oracle_accddoa ---
 # task=savnce_pretraining
@@ -75,6 +61,7 @@ export MASTER_PORT=${port}
 #     --exp-config savnce_baselines/magnet/config/mp3d/rgbd_ddppo_benchmark_pretraining.yaml \
 #     --model-dir ${model_dir}
 
+
 # --- oracle_accddoa_everlasting ---
 # task=savnce_pretraining
 # exp_id=oracle_accddoa_everlasting
@@ -89,6 +76,7 @@ export MASTER_PORT=${port}
 #     --exp-config savnce_baselines/magnet/config/mp3d/rgbd_ddppo_benchmark_pretraining.yaml \
 #     --model-dir ${model_dir} \
 #     TASK_CONFIG.TASK.ORACLE_ACCDDOA_SENSOR.EVERLASTING True
+
 
 # --- magnet ---
 # task=savnce_pretraining

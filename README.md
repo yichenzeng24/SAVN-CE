@@ -96,7 +96,7 @@ torchrun \
 
 ### 4. Testing
 
-Evaluate training checkpoints and test the best-performing model on the validation split:
+Select the best checkpoint based on validation SPL and evaluate it on the test split:
 
 ```bash
 python \
@@ -105,7 +105,11 @@ python \
     --exp-config savnce_baselines/magnet/config/mp3d/rgbd_ddppo_clean.yaml \
     --model-dir data/models/savnce/magnet \
     --eval-best \
-    EVAL.SPLIT test
+    EVAL.SPLIT test \
+    TEST_EPISODE_COUNT 1000 \
+    RL.PPO.GOAL_DESCRIPTOR.use_pretrained False \
+    RL.PPO.SCENE_MEMORY_TRANSFORMER.use_pretrained False \
+    RL.DDPPO.pretrained False
 ```
 To test a specific checkpoint: replace `--eval-best` with `EVAL_CKPT_PATH_DIR data/models/savnce/magnet/data/ckpt.xxx.pth`.
 ### 5. Generate demo video
@@ -160,7 +164,7 @@ In total, completing all training and evaluation processes (including our method
 
 **3.** If a CUDA out-of-memory (OOM) error occurs during training:
 - reduce the number of parallel environments per GPU (`NUM_PROCESSES`), or
-- reduce the mini-batch size (`num_mini_batch`).
+- increase the number of mini-batches (`num_mini_batch`) to reduce the size of each mini-batch.
 
 Ensure that `NUM_PROCESSES` is divisible by `num_mini_batch`. 
 

@@ -38,7 +38,7 @@ from savnce_baselines.common.ddp_utils import (
 )
 from savnce_baselines.magnet.ddppo.ddppo import DDPPO
 from savnce_baselines.magnet.ppo.ppo_trainer import PPOTrainer
-from savnce_baselines.magnet.ppo.policy import SAVNCE_Policy
+from savnce_baselines.magnet.ppo.policy import MAGNetPolicy
 from savnce_baselines.magnet.models.goal_descriptor import GoalDescriptor, GoalDescriptorDDP
 from savnce_baselines.magnet.models.rollout_storage import RolloutStorage
 
@@ -73,11 +73,11 @@ class DDPPOTrainer(PPOTrainer):
         self.action_space = self.envs.action_spaces[0]
 
         has_distractor_sound = self.config.TASK_CONFIG.SIMULATOR.AUDIO.HAS_DISTRACTOR_SOUND
-        if ppo_cfg.policy_type == 'savnce':
+        if ppo_cfg.policy_type == 'magnet':
             smt_cfg = ppo_cfg.SCENE_MEMORY_TRANSFORMER
             goal_descriptor_cfg = ppo_cfg.GOAL_DESCRIPTOR
             observation_space = self.envs.observation_spaces[0]
-            self.actor_critic = SAVNCE_Policy(
+            self.actor_critic = MAGNetPolicy(
                 observation_space=observation_space,
                 action_space=self.action_space,
                 smt_cfg=smt_cfg,
@@ -107,38 +107,6 @@ class DDPPOTrainer(PPOTrainer):
 
         self.actor_critic.to(self.device)
 
-        if self.config.RL.DDPPO.pretrained:
-            # load weights for both actor critic and the encoder
-            pretrained_state = torch.load(self.config.RL.DDPPO.pretrained_weights, map_location="cpu", weights_only=False)
-            self.actor_critic.load_state_dict(
-                {
-                    k[len("actor_critic."):]: v
-                    for k, v in pretrained_state["state_dict"].items()
-                    if "actor_critic.net.visual_encoder" not in k and
-                       "actor_critic.net.smt_state_encoder" not in k
-                },
-                strict=False
-            )
-            self.actor_critic.net.visual_encoder.rgb_encoder.load_state_dict(
-                {
-                    k[len("actor_critic.net.visual_encoder.rgb_encoder."):]: v
-                    for k, v in pretrained_state["state_dict"].items()
-                    if "actor_critic.net.visual_encoder.rgb_encoder." in k
-                },
-            )
-            self.actor_critic.net.visual_encoder.depth_encoder.load_state_dict(
-                {
-                    k[len("actor_critic.net.visual_encoder.depth_encoder."):]: v
-                    for k, v in pretrained_state["state_dict"].items()
-                    if "actor_critic.net.visual_encoder.depth_encoder." in k
-                },
-            )
-            logger.info(f"Loaded pretrained weights for actor critic from {self.config.RL.DDPPO.pretrained_weights}")
-            if ppo_cfg.use_goal_descriptor:
-                assert 'goal_descriptor' in pretrained_state, 'Unable to find goal descriptor model weights'
-                self.goal_descriptor.load_state_dict(pretrained_state['goal_descriptor'])
-                logger.info(f"Loaded pretrained weights for goal descriptor from {self.config.RL.DDPPO.pretrained_weights}")
-
         if self.config.RL.DDPPO.reset_critic:
             nn.init.orthogonal_(self.actor_critic.critic.fc.weight)
             nn.init.constant_(self.actor_critic.critic.fc.bias, 0)
@@ -156,6 +124,17 @@ class DDPPOTrainer(PPOTrainer):
             use_normalized_advantage=ppo_cfg.use_normalized_advantage,
         )
 
+        if self.config.RL.DDPPO.pretrained:
+            # load weights for both actor critic and the encoder
+            pretrained_state = torch.load(self.config.RL.DDPPO.pretrained_weights, map_location="cpu", weights_only=False)
+            self.agent.load_state_dict(pretrained_state["state_dict"])
+            logger.info(f"Loaded pretrained weights for actor critic from {self.config.RL.DDPPO.pretrained_weights}")
+            # load weights for goal descriptor
+            if ppo_cfg.use_goal_descriptor:
+                assert 'goal_descriptor' in pretrained_state, 'Unable to find goal descriptor model weights'
+                self.goal_descriptor.load_state_dict(pretrained_state['goal_descriptor'])
+                logger.info(f"Loaded pretrained weights for goal descriptor from {self.config.RL.DDPPO.pretrained_weights}")
+    
     def train(self) -> None:
         r"""Main method for DD-PPO.
 

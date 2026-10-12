@@ -7,18 +7,18 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
 # --- Eval pretraining checkpoints ---
 
-task=savnce_pretraining
-exp_id=smt_audio
-model_dir=data/models/${task}/${exp_id}
+# task=savnce_pretraining
+# exp_id=smt_audio
+# model_dir=data/models/${task}/${exp_id}
 
-CUDA_VISIBLE_DEVICES=0 \
-python \
-    savnce_baselines/savi/run.py \
-    --run-type eval \
-    --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean_pretraining.yaml \
-    --model-dir ${model_dir} \
-    --prev-ckpt-ind 0 \
-    --eval-interval 2
+# CUDA_VISIBLE_DEVICES=0 \
+# python \
+#     savnce_baselines/savi/run.py \
+#     --run-type eval \
+#     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean_pretraining.yaml \
+#     --model-dir ${model_dir} \
+#     --prev-ckpt-ind 0 \
+#     --eval-interval 2
 
 
 # task=savnce_pretraining
@@ -29,7 +29,7 @@ python \
 # python \
 #     savnce_baselines/savi/run.py \
 #     --run-type eval \
-#     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean_pretraining.yaml \
+#     --exp-config savnce_baselines/savi/config/mp3d/rgbd_ddppo_clean_pretraining.yaml \
 #     --model-dir ${model_dir} \
 #     --prev-ckpt-ind 0 \
 #     --eval-interval 2
@@ -117,7 +117,7 @@ python \
 # python \
 #     savnce_baselines/savi/run.py \
 #     --run-type eval \
-#     --exp-config savnce_baselines/benchmark/config/smt_audio/rgbd_ddppo_clean.yaml \
+#     --exp-config savnce_baselines/savi/config/mp3d/rgbd_ddppo_clean.yaml \
 #     --model-dir ${model_dir} \
 #     --prev-ckpt-ind 0 \
 #     --eval-interval 2

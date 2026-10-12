@@ -248,7 +248,7 @@ def get_config(
     config.LOG_FILE = os.path.join(config.MODEL_DIR, f'{run_type}.log')
     config.EVAL_CKPT_PATH_DIR = os.path.join(config.MODEL_DIR, 'data')
 
-    if run_type == 'eval':
+    if run_type != 'train':
         # overwrite training configs
         config.defrost()
         config.NUM_PROCESSES = 10

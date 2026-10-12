@@ -8,6 +8,7 @@ export HABITAT_SIM_LOG='quiet'
 export PYTHONPATH="$PYTHONPATH:$(pwd)"
 export MASTER_PORT=${port}
 
+
 # --- av_nav ---
 # task=savnce
 # exp_id=av_nav
@@ -21,6 +22,7 @@ export MASTER_PORT=${port}
 #     --run-type train \
 #     --exp-config savnce_baselines/av_nav/config/mp3d/rgbd_ddppo_clean.yaml \
 #     --model-dir ${model_dir}
+
 
 # --- smt_audio ---
 # task=savnce
@@ -38,6 +40,7 @@ export MASTER_PORT=${port}
 #     RL.DDPPO.pretrained True \
 #     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/smt_audio/data/ckpt.xxx.pth
 
+
 # --- savi ---
 # task=savnce
 # exp_id=savi
@@ -53,6 +56,7 @@ export MASTER_PORT=${port}
 #     --model-dir ${model_dir} \
 #     RL.DDPPO.pretrained True \
 #     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/savi/data/ckpt.xxx.pth
+
 
 # --- oracle_accddoa ---
 # task=savnce
@@ -70,6 +74,7 @@ export MASTER_PORT=${port}
 #     RL.DDPPO.pretrained True \
 #     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/oracle_accddoa/data/ckpt.xxx.pth
 
+
 # --- oracle_accddoa_everlasting ---
 # task=savnce
 # exp_id=oracle_accddoa_everlasting
@@ -86,6 +91,7 @@ export MASTER_PORT=${port}
 #     TASK_CONFIG.TASK.ORACLE_ACCDDOA_SENSOR.EVERLASTING True \
 #     RL.DDPPO.pretrained True \
 #     RL.DDPPO.pretrained_weights data/models/savnce_pretraining/oracle_accddoa_everlasting/data/ckpt.xxx.pth
+
 
 # --- magnet ---
 # task=savnce

@@ -5,10 +5,12 @@
 export HABITAT_SIM_LOG='quiet'
 export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 
+
 # --- Usage notes ---
 # Distracted Environment: replace **/rgbd_ddppo_clean.yaml with **/rgbd_ddppo_distractor.yaml,
 #   and EVAL.SPLIT test with EVAL.SPLIT test_distractor.
 # Specific checkpoint: replace --eval-best with EVAL_CKPT_PATH_DIR data/models/savnce/<exp_id>/data/ckpt.xxx.pth
+
 
 # --- av_nav ---
 # task=savnce
@@ -26,6 +28,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 #     TEST_EPISODE_COUNT 1000 \
 #     RL.DDPPO.pretrained False
 
+
 # --- smt_audio ---
 # task=savnce
 # exp_id=smt_audio
@@ -41,6 +44,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 #     EVAL.SPLIT test \
 #     TEST_EPISODE_COUNT 1000 \
 #     RL.DDPPO.pretrained False
+
 
 # --- savi ---
 # task=savnce
@@ -58,6 +62,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 #     TEST_EPISODE_COUNT 1000 \
 #     RL.DDPPO.pretrained False
 
+
 # --- oracle_accddoa ---
 # task=savnce
 # exp_id=oracle_accddoa
@@ -73,6 +78,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 #     EVAL.SPLIT test \
 #     TEST_EPISODE_COUNT 1000 \
 #     RL.DDPPO.pretrained False
+
 
 # --- oracle_accddoa_everlasting ---
 # task=savnce
@@ -90,6 +96,7 @@ export PYTHONPATH="${PYTHONPATH:+:}$(pwd)"
 #     EVAL.SPLIT test \
 #     TEST_EPISODE_COUNT 1000 \
 #     RL.DDPPO.pretrained False
+
 
 # --- magnet ---
 # task=savnce

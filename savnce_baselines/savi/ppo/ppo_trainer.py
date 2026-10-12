@@ -140,12 +140,6 @@ class PPOTrainer(BaseRLTrainer):
             max_grad_norm=ppo_cfg.max_grad_norm,
         )
 
-        if self.config.RESUME:
-            ckpt_dict = self.load_checkpoint('data/models/smt_with_pose/ckpt.400.pth', map_location="cpu")
-            self.agent.actor_critic.net.visual_encoder.load_state_dict(self.search_dict(ckpt_dict, 'visual_encoder'))
-            self.agent.actor_critic.net.goal_encoder.load_state_dict(self.search_dict(ckpt_dict, 'goal_encoder'))
-            self.agent.actor_critic.net.action_encoder.load_state_dict(self.search_dict(ckpt_dict, 'action_encoder'))
-
         if ppo_cfg.use_external_memory and smt_cfg.freeze_encoders:
             self._static_smt_encoder = True
             self.actor_critic.net.freeze_encoders()

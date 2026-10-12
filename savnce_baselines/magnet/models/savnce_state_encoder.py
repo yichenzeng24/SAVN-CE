@@ -68,7 +68,6 @@ class SAVNCE_StateEncoder(nn.Module):
             activation=activation,
         )
 
-
     def _convert_masks_to_transformer_format(self, memory_masks):
         r"""The memory_masks is a FloatTensor with
             -   zeros for invalid locations, and
@@ -98,10 +97,13 @@ class SAVNCE_StateEncoder(nn.Module):
         if self._pretraining:
             memory_masks = torch.cat(
                 [torch.zeros_like(memory_masks), torch.ones([memory_masks.shape[0], 1], device=memory_masks.device)],
-                dim=1)
+                dim=1
+            )
         else:
-            memory_masks = torch.cat([memory_masks, torch.ones([memory_masks.shape[0], 1], device=memory_masks.device)],
-                                     dim=1)
+            memory_masks = torch.cat(
+                [memory_masks, torch.ones([memory_masks.shape[0], 1], device=memory_masks.device)],
+                dim=1
+            )
 
         # Compress features
         memory = torch.cat([memory, x.unsqueeze(0)])
